@@ -1,7 +1,7 @@
 {
     "name": "Mi App PWA",
-    "short_name": "MiApp",
-    "description": "Aplicación web progresiva con Vue y Tailwind",
+    "short_name": "ProdOrg Store",
+    "description": "Aplicación web de Productos Organicos ",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
@@ -9,12 +9,12 @@
     "orientation": "portrait-primary",
     "icons": [
       {
-        "src": "/icon-192x192.png",
+        "src": "/logo_app_192.png",
         "sizes": "192x192",
         "type": "image/png"
       },
       {
-        "src": "/icon-512x512.png",
+        "src": "/logo_app_512.png",
         "sizes": "512x512",
         "type": "image/png"
       }

@@ -331,7 +331,7 @@
     <!-- Install PWA Prompt -->
     <div v-if="showInstallPrompt" class="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg flex justify-between items-center">
       <div>
-        <h3 class="font-bold">Install App</h3>
+        <h3 class="font-bold">Instalar App</h3>
         <p class="text-sm text-gray-600">Add to your home screen for a better experience</p>
       </div>
       <div class="flex space-x-2">
@@ -339,7 +339,7 @@
           Later
         </button>
         <button @click="installPWA" class="px-3 py-1 bg-amber-800 text-white rounded">
-          Install
+          Instalar App
         </button>
       </div>
     </div>
