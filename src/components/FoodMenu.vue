@@ -281,21 +281,7 @@
             <span class="font-bold">${{ cartTotal.toFixed(2) }}</span>
           </div>
           
-          <!-- Checkout Options -->
-          <div class="grid gap-3">
-            <!-- WhatsApp Order Button -->
-            <a :href="whatsappOrderLink" target="_blank" rel="noopener noreferrer"
-               class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-md transition-colors flex items-center justify-center"
-               :class="{ 'opacity-50 cursor-not-allowed': cartItems.length === 0 }"
-               :disabled="cartItems.length === 0"
-               @click="cartItems.length === 0 ? $event.preventDefault() : null">
-              <MessageCircle class="h-5 w-5 mr-2" />
-              Ordenar via WhatsApp
-            </a>
-            
-            <!-- Regular Checkout Button -->
 
-          </div>
           
           <!-- Customer Information Form -->
           <div class="mt-4 pt-4 border-t">
@@ -320,6 +306,23 @@
                           placeholder="Informacion Adiccional"></textarea>
               </div>
             </div>
+          </div>
+
+
+                    <!-- Checkout Options -->
+                    <div class="grid gap-3">
+            <!-- WhatsApp Order Button -->
+            <a :href="whatsappOrderLink" target="_blank" rel="noopener noreferrer"
+               class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-md transition-colors flex items-center justify-center"
+               :class="{ 'opacity-50 cursor-not-allowed': cartItems.length === 0 }"
+               :disabled="cartItems.length === 0"
+               @click="cartItems.length === 0 ? $event.preventDefault() : null">
+              <MessageCircle class="h-5 w-5 mr-2" />
+              Ordenar via WhatsApp
+            </a>
+            
+            <!-- Regular Checkout Button -->
+
           </div>
         </div>
       </div>
