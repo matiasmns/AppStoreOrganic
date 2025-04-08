@@ -432,7 +432,7 @@ const menuItems = [
     name: 'Pasta de Mani - Sabor Natural',
     description: 'Pasta de Mani - Entre Nuts',
     price: 4800,
-    image: '/images/products/01.png',
+    image: '/images/products/pastademani/1.png',
     category: 'pastamani',
     popular: true,
     rating: 4,
@@ -687,46 +687,8 @@ const menuItems = [
     allergens: [],
     prepTime: 15
   },
-  {
-    id: 14,
-    name: 'Pasta de Mani - Sabor COCO',
-    description: 'Pasta de Mani - Entre Nuts',
-    price: 4800,
-    image: '/images/products/01.png',
-    category: 'pastamani',
-    popular: true,
-    rating: 4,
-    reviews: 42,
-    ingredients: ['Mani','Aceite'],
-    nutrition: {
-      calories: 320,
-      protein: 18,
-      carbs: 24,
-      fat: 16
-    },
-    allergens: ['Gluten', 'Huevos'],
-    prepTime: 15
-  },
-  {
-    id: 15,
-    name: 'Pasta de Mani - Sabor Ahumada',
-    description: 'Pasta de Mani - Entre Nuts',
-    price: 4800,
-    image: '/images/products/01.png',
-    category: 'pastamani',
-    popular: true,
-    rating: 4,
-    reviews: 42,
-    ingredients: ['Mani','Aceite'],
-    nutrition: {
-      calories: 320,
-      protein: 18,
-      carbs: 24,
-      fat: 16
-    },
-    allergens: ['Gluten', 'Huevos'],
-    prepTime: 15
-  },
+
+
   {
     id: 16,
     name: 'Arroz Organico',
@@ -927,26 +889,7 @@ const menuItems = [
     allergens: ['Dairy', 'Eggs', 'Gluten'],
     prepTime: 15
   },
-  {
-    id: 26,
-    name: 'Aceite de Coco EntreNuts',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
-    price: 9.99,
-    image: '/images/products/2.png',
-    category: 'aceites',
-    popular: false,
-    rating: 5,
-    reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
-    nutrition: {
-      calories: 380,
-      protein: 7,
-      carbs: 42,
-      fat: 22
-    },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
-  },
+  
   {
     id: 27,
     name: 'Aceite Gaia 1 lt',
@@ -1053,7 +996,7 @@ const menuItems = [
     description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
     price: 9.99,
     image: '/images/products/7.png',
-    category: 'limpieza',
+    category: 'sal',
     popular: false,
     rating: 5,
     reviews: 0,
@@ -1065,6 +1008,126 @@ const menuItems = [
       fat: 0
     },
     allergens: [],
+    prepTime: 15
+  },
+  {
+    id: 33,
+    name: 'Pasta de Mani - Sabor Ahumada',
+    description: 'Pasta de Mani - Entre Nuts',
+    price: 4800,
+    image: '/images/products/pastademani/2.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani','Aceite'],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+    prepTime: 15
+  },
+  {
+    id: 34,
+    name: 'Pasta de Mani - Sabor Natural',
+    description: 'Pasta de Mani - Entre Nuts',
+    price: 4800,
+    image: '/images/products/pastademani/3.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani','Aceite'],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+    prepTime: 15
+  },
+  {
+    id: 35,
+    name: 'Pasta de Mani - Sabor Natural',
+    description: 'Pasta de Mani - Entre Nuts',
+    price: 4800,
+    image: '/images/products/pastademani/4.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani','Aceite'],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+    prepTime: 15
+  },
+  {
+    id: 36,
+    name: 'Pasta de Mani - Sabor Natural',
+    description: 'Pasta de Mani - Entre Nuts',
+    price: 4800,
+    image: '/images/products/pastademani/5.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani','Aceite'],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+    prepTime: 15
+  },
+  {
+    id: 37,
+    name: 'Pasta de Mani - Sabor Natural',
+    description: 'Pasta de Mani - Entre Nuts',
+    price: 4800,
+    image: '/images/products/pastademani/6.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani','Aceite'],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+    prepTime: 15
+  },
+  {
+    id: 38,
+    name: 'Pasta de Mani - Sabor Coco',
+    description: 'Pasta de Mani - Entre Nuts',
+    price: 4800,
+    image: '/images/products/pastademani/7.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani','Aceite'],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
     prepTime: 15
   },
 ];
