@@ -204,7 +204,7 @@
                 <button @click.stop="addToCart(item)" 
                         class="w-full bg-green-700 hover:bg-green-600 text-white py-2 rounded-md transition-colors flex items-center justify-center">
                   <ShoppingCart class="h-4 w-4 mr-2" />
-                  Add to Cart
+                  Agregar al Carro
                 </button>
               </div>
             </div>
@@ -237,7 +237,7 @@
               <button @click.stop="addToCart(item)" 
                       class="w-full bg-green-700 hover:bg-amber-800 text-white py-2 rounded-md transition-colors flex items-center justify-center">
                 <ShoppingCart class="h-4 w-4 mr-2" />
-                Add to Cart
+                Agregar al Carro
               </button>
             </div>
           </div>
@@ -299,6 +299,21 @@
                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                           placeholder="Direccion del Envio"></textarea>
               </div>
+              <div class="mt-2">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Retirar en el Local</label>
+              <div class="flex space-x-4">
+                <label class="inline-flex items-center">
+                  <input type="radio" v-model="customerInfo.pickupInStore" :value="false" 
+                         class="form-radio text-amber-600 focus:ring-amber-500">
+                  <span class="ml-2">Si</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" v-model="customerInfo.pickupInStore" :value="true" 
+                         class="form-radio text-amber-600 focus:ring-amber-500">
+                  <span class="ml-2">No</span>
+                </label>
+              </div>
+            </div>
               <div>
                 <label for="customer-notes" class="block text-sm font-medium text-gray-700 mb-1">Informacion Adiccional</label>
                 <textarea id="customer-notes" v-model="customerInfo.notes" rows="2"
@@ -332,11 +347,11 @@
     <div v-if="showInstallPrompt" class="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg flex justify-between items-center">
       <div>
         <h3 class="font-bold">Instalar App</h3>
-        <p class="text-sm text-gray-600">Add to your home screen for a better experience</p>
+        <p class="text-sm text-gray-600">Instalar en tu escritorio para una mejor experiencia</p>
       </div>
       <div class="flex space-x-2">
         <button @click="showInstallPrompt = false" class="px-3 py-1 text-gray-600">
-          Later
+          Despues
         </button>
         <button @click="installPWA" class="px-3 py-1 bg-amber-800 text-white rounded">
           Instalar App
@@ -372,6 +387,7 @@ let deferredPrompt = null;
 const customerInfo = ref({
   name: '',
   address: '',
+  pickupInStore: '',
   notes: ''
 });
 
@@ -391,7 +407,15 @@ const categories = [
   { id: 'yerbamate', name: 'Yerbas Organicas' },
   { id: 'vino', name: 'Vinos' },
   { id: 'arroz', name: 'Arroz Organico' },
-  { id: 'miel', name: 'Miel Organica' }
+  { id: 'miel', name: 'Miel Organica' },
+  { id: 'aceites', name: 'Aceites' },
+  { id: 'limpieza', name: 'Limpieza'},
+  { id: 'cereales', name: 'Cereales y Semillas'},
+  { id: 'mayorista', name: 'Productos Mayorista'},
+  { id: 'sal', name: 'Sal Organica'}
+
+
+
 
   
 ];
@@ -425,10 +449,10 @@ const menuItems = [
   },
   {
     id: 2,
-    name: 'Huevos',
-    description: 'Toasted bread topped with tomatoes, garlic, and fresh basil',
+    name: 'Huevos de Campo',
+    description: 'Huevos de campo organicos',
     price: 9.99,
-    image: '/images/products/3.png',
+    image: '/images/products/4.png',
     category: 'huevos',
     popular: false,
     rating: 5,
@@ -486,9 +510,9 @@ const menuItems = [
   {
     id: 5,
     name: 'Cafe de Colombia',
-    description: 'Creamy arborio rice with wild mushrooms and parmesan',
+    description: 'Cafe organico de origen colombiano',
     price: 18.99,
-    image: '/images/products/6.png',
+    image: '/images/products/10.png',
     category: 'cafe',
     popular: true,
     rating: 4,
@@ -500,7 +524,7 @@ const menuItems = [
       carbs: 58,
       fat: 16
     },
-    allergens: ['Dairy'],
+    allergens: [''],
     prepTime: 35
   },
   {
@@ -568,7 +592,7 @@ const menuItems = [
     name: 'Vino 4 Vacas',
     description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
     price: 9.99,
-    image: '/images/products/11.png',
+    image: '/images/products/15.png',
     category: 'vino',
     popular: false,
     rating: 5,
@@ -588,7 +612,7 @@ const menuItems = [
     name: 'Yerba Mate Digestiva',
     description: ' Corte Tradicional, con un sabor intenso. Tiene yuyos del amazona misionero, Manzanilla, Marcela, Carnicera, Te Verde, Palta, Cedron Es una Yerba Diuretica, te ayuda si tenes problemas digestivos o intestinales. ',
     price: 5500,
-    image: '/images/products/7.png',
+    image: '/images/products/11.png',
     category: 'yerbamate',
     popular: false,
     rating: 5,
@@ -608,7 +632,7 @@ const menuItems = [
     name: 'Yerba Mate Despalada',
     description: ' Corte Tradicional, con un sabor intenso. Tiene yuyos del amazona misionero, Manzanilla, Marcela, Carnicera, Te Verde, Palta, Cedron Es una Yerba Diuretica, te ayuda si tenes problemas digestivos o intestinales. ',
     price: 6000,
-    image: '/images/products/8.png',
+    image: '/images/products/12.png',
     category: 'yerbamate',
     popular: false,
     rating: 5,
@@ -628,7 +652,7 @@ const menuItems = [
     name: 'Yerba Mate Ahumada',
     description: ' Corte Tradicional, con un sabor intenso. Tiene yuyos del amazona misionero, Manzanilla, Marcela, Carnicera, Te Verde, Palta, Cedron Es una Yerba Diuretica, te ayuda si tenes problemas digestivos o intestinales. ',
     price: 5500,
-    image: '/images/products/9.png',
+    image: '/images/products/13.png',
     category: 'yerbamate',
     popular: false,
     rating: 5,
@@ -648,7 +672,7 @@ const menuItems = [
     name: 'Yerba Mate Suave',
     description: ' Corte Tradicional, con un sabor intenso. Tiene yuyos del amazona misionero, Manzanilla, Marcela, Carnicera, Te Verde, Palta, Cedron Es una Yerba Diuretica, te ayuda si tenes problemas digestivos o intestinales. ',
     price: 5500,
-    image: '/images/products/10.png',
+    image: '/images/products/14.png',
     category: 'yerbamate',
     popular: false,
     rating: 5,
@@ -743,6 +767,306 @@ const menuItems = [
     allergens: ['Gluten', 'Huevos'],
     prepTime: 15
   },
+  {
+    id: 18,
+    name: 'Cafe de Peru',
+    description: 'Cafe organico de origen del Peru',
+    price: 18.99,
+    image: '/images/products/8.png',
+    category: 'cafe',
+    popular: true,
+    rating: 4,
+    reviews: 39,
+    ingredients: ['Arborio Rice', 'Wild Mushrooms', 'Parmesan', 'White Wine', 'Onion', 'Vegetable Stock'],
+    nutrition: {
+      calories: 420,
+      protein: 12,
+      carbs: 58,
+      fat: 16
+    },
+    allergens: [''],
+    prepTime: 35
+  },
+  {
+    id: 19,
+    name: 'Cafe de Brasil',
+    description: 'Cafe organico de origen Brasilero',
+    price: 18.99,
+    image: '/images/products/9.png',
+    category: 'cafe',
+    popular: true,
+    rating: 4,
+    reviews: 39,
+    ingredients: ['Arborio Rice', 'Wild Mushrooms', 'Parmesan', 'White Wine', 'Onion', 'Vegetable Stock'],
+    nutrition: {
+      calories: 420,
+      protein: 12,
+      carbs: 58,
+      fat: 16
+    },
+    allergens: [''],
+    prepTime: 35
+  },
+  {
+    id: 20,
+    name: 'Vino 4 Vacas',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/16.png',
+    category: 'vino',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 21,
+    name: 'Vino 4 Vacas',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/17.png',
+    category: 'vino',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 22,
+    name: 'Yerba Despalada 3KG',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/24.png',
+    category: 'mayorista',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 23,
+    name: 'Yerba Suave por 3KG',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/22.png',
+    category: 'mayorista',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 24,
+    name: 'Yerba Digestiva por 3kg',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/23.png',
+    category: 'mayorista',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 25,
+    name: 'Yerba Ahumada por 3kg',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/25.png',
+    category: 'mayorista',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 26,
+    name: 'Aceite de Coco EntreNuts',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/2.png',
+    category: 'aceites',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 27,
+    name: 'Aceite Gaia 1 lt',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/18.png',
+    category: 'aceites',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 28,
+    name: 'Aceite Gaia 3 lt',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/19.png',
+    category: 'aceites',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 29,
+    name: 'Mix Cereales',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/6.png',
+    category: 'cereales',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 30,
+    name: 'Jabon Liquido',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/20.png',
+    category: 'limpieza',
+    popular: false,
+    rating: 5,
+    reviews: 53,
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    nutrition: {
+      calories: 380,
+      protein: 7,
+      carbs: 42,
+      fat: 22
+    },
+    allergens: ['Dairy', 'Eggs', 'Gluten'],
+    prepTime: 15
+  },
+  {
+    id: 31,
+    name: 'Suavizante para Ropa',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/21.png',
+    category: 'limpieza',
+    popular: false,
+    rating: 5,
+    reviews: 0,
+    ingredients: [],
+    nutrition: {
+      calories: 0,
+      protein: 0,
+      carbs: 0,
+      fat: 0
+    },
+    allergens: [],
+    prepTime: 15
+  },
+  {
+    id: 32,
+    name: 'Sal del Himalaya',
+    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    price: 9.99,
+    image: '/images/products/7.png',
+    category: 'limpieza',
+    popular: false,
+    rating: 5,
+    reviews: 0,
+    ingredients: [],
+    nutrition: {
+      calories: 0,
+      protein: 0,
+      carbs: 0,
+      fat: 0
+    },
+    allergens: [],
+    prepTime: 15
+  },
 ];
 
 // Helper function to get category name by ID
@@ -761,15 +1085,19 @@ const formatOrderForWhatsApp = () => {
   if (cartItems.value.length === 0) return '';
   
   // Start with greeting and customer info
-  let message = `*New Order from ${restaurantInfo.name}*\n\n`;
+  let message = `*Solicitud de Pedido ${restaurantInfo.name}*\n\n`;
   
   // Add customer information if provided
   if (customerInfo.value.name) {
-    message += `*Customer:* ${customerInfo.value.name}\n`;
+    message += `*Cliente:* ${customerInfo.value.name}\n`;
   }
   
   if (customerInfo.value.address) {
-    message += `*Delivery Address:* ${customerInfo.value.address}\n`;
+    message += `*Direccion de Envio:* ${customerInfo.value.address}\n`;
+  }
+
+  if (customerInfo.value.pickupInStore) {
+    message += `*Retiro en el Local:* ${customerInfo.value.pickupInStore}\n`;
   }
   
   message += '\n*Order Details:*\n';
@@ -784,14 +1112,14 @@ const formatOrderForWhatsApp = () => {
   
   // Add special instructions if provided
   if (customerInfo.value.notes) {
-    message += `\n*Special Instructions:*\n${customerInfo.value.notes}\n`;
+    message += `\n*Informacion Extra:*\n${customerInfo.value.notes}\n`;
   }
   
   // Add timestamp
-  message += `\nOrder placed: ${new Date().toLocaleString()}\n`;
+  message += `\nInformacion del pedido: ${new Date().toLocaleString()}\n`;
   
   // Add thank you message
-  message += '\nThank you for your order!';
+  message += '\nGracias por su compra!';
   
   return encodeURIComponent(message);
 };
@@ -864,7 +1192,7 @@ const addToCart = (item) => {
   
   // Show toast notification
   showToast(
-    'Added to Cart', 
+    'Compra agregada al Carro', 
     `${item.name} fue agregado al Pedido.`, 
     'success'
   );
@@ -876,7 +1204,7 @@ const removeFromCart = (index) => {
   
   // Show toast notification
   showToast(
-    'Removed from Cart', 
+    'Producto Removido del Carro', 
     `${item.name} fue removido del Pedido.`, 
     'info'
   );
