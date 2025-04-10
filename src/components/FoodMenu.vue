@@ -106,7 +106,7 @@
               <!-- Preparation Time -->
               <div class="flex items-center mb-6">
                 <Clock class="h-5 w-5 text-green-700 mr-2" />
-                <span class="text-gray-700">Entrega: {{ selectedFood.prepTime }} minutes</span>
+                <span class="text-gray-700">Entrega: {{ selectedFood.prepTime }} a Domicilio o Retiro en el Local</span>
               </div>
               
               <!-- Action Buttons -->
@@ -304,12 +304,12 @@
               <div class="flex space-x-4">
                 <label class="inline-flex items-center">
                   <input type="radio" v-model="customerInfo.pickupInStore" :value="false" 
-                         class="form-radio text-amber-600 focus:ring-amber-500">
+                         class="w-5 h-5 appearance-none border-2 border-gray-400 rounded-sm checked:bg-blue-600 checked:border-transparent focus:outline-none">
                   <span class="ml-2">Si</span>
                 </label>
                 <label class="inline-flex items-center">
                   <input type="radio" v-model="customerInfo.pickupInStore" :value="true" 
-                         class="form-radio text-amber-600 focus:ring-amber-500">
+                         class="w-5 h-5 appearance-none border-2 border-gray-400 rounded-sm checked:bg-blue-600 checked:border-transparent focus:outline-none">
                   <span class="ml-2">No</span>
                 </label>
               </div>
@@ -364,6 +364,11 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { ShoppingBag, ShoppingCart, X, Trash2, CheckCircle, Star, Check, Clock, Heart, MessageCircle } from 'lucide-vue-next';
+
+import { defineProps } from 'vue';
+const props = defineProps({
+  msg: String // Or ['msg']
+});
 
 // Splash screen state
 const showSplash = ref(true);
@@ -430,13 +435,13 @@ const menuItems = [
   {
     id: 1,
     name: 'Pasta de Mani - Sabor Natural',
-    description: 'Pasta de Mani - Entre Nuts',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
     price: 4800,
     image: '/images/products/pastademani/1.png',
     category: 'pastamani',
     popular: true,
     rating: 4,
-    reviews: 42,
+    reviews: 0,
     ingredients: ['Mani','Aceite'],
     nutrition: {
       calories: 320,
@@ -444,28 +449,26 @@ const menuItems = [
       carbs: 24,
       fat: 16
     },
-    allergens: ['SinTacc',],
-    prepTime: 15
+    allergens: ['SinTacc','Sin Gluten','Vegano'],
   },
   {
     id: 2,
     name: 'Huevos de Campo',
-    description: 'Huevos de campo organicos',
+    description: 'Mapple de huevos de gallinas criadas al aire libre: Nuestros huevos provienen de gallinas alimentadas de manera natural, sin hormonas ni antibióticos, y criadas al aire libre.',
     price: 9.99,
     image: '/images/products/4.png',
     category: 'huevos',
     popular: false,
     rating: 5,
-    reviews: 36,
-    ingredients: ['Baguette', 'Tomatoes', 'Garlic', 'Basil', 'Olive Oil', 'Balsamic Glaze'],
+    reviews: 0,
+    ingredients: ['Huevos',],
     nutrition: {
       calories: 180,
       protein: 4,
       carbs: 28,
       fat: 6
     },
-    allergens: ['Gluten'],
-    prepTime: 10
+    allergens: ['SinTacc'],
   },
   {
     id: 3,
@@ -510,22 +513,21 @@ const menuItems = [
   {
     id: 5,
     name: 'Cafe de Colombia',
-    description: 'Cafe organico de origen colombiano',
+    description: 'Cafe organico de origen colombiano organico',
     price: 18.99,
     image: '/images/products/10.png',
     category: 'cafe',
     popular: true,
     rating: 4,
     reviews: 39,
-    ingredients: ['Arborio Rice', 'Wild Mushrooms', 'Parmesan', 'White Wine', 'Onion', 'Vegetable Stock'],
+    ingredients: ['Cafe colombiano',],
     nutrition: {
       calories: 420,
       protein: 12,
       carbs: 58,
       fat: 16
     },
-    allergens: [''],
-    prepTime: 35
+    allergens: ['Sin Tacc'],
   },
   {
     id: 6,
@@ -589,23 +591,22 @@ const menuItems = [
   },
   {
     id: 9,
-    name: 'Vino 4 Vacas',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    name: 'Vino 4 Vacas X 750cc',
+    description: 'Vino Vacas Gordas Cabernet Malbec X 750cc Bodega Caligiore',
     price: 9.99,
     image: '/images/products/15.png',
     category: 'vino',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Uvas',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: ['Cabernet Malbec',],
   },
   {
     id: 10,
@@ -625,7 +626,6 @@ const menuItems = [
       fat: 0
     },
     allergens: [],
-    prepTime: 15
   },
   {
     id: 11,
@@ -645,7 +645,6 @@ const menuItems = [
       fat: 0
     },
     allergens: [],
-    prepTime: 15
   },
   {
     id: 12,
@@ -665,7 +664,6 @@ const menuItems = [
       fat: 0
     },
     allergens: [],
-    prepTime: 15
   },
   {
     id: 13,
@@ -685,29 +683,27 @@ const menuItems = [
       fat: 0
     },
     allergens: [],
-    prepTime: 15
   },
 
 
   {
     id: 16,
     name: 'Arroz Organico',
-    description: 'Arroz organico blanco',
+    description: 'Arroz orgánico que se cultiva aprovechando la capacidad productiva natural de los arrozales, sin recurrir a pesticidas ni fertilizantes químicos ',
     price: 4800,
     image: '/images/products/5.png',
     category: 'arroz',
     popular: true,
     rating: 4,
     reviews: 42,
-    ingredients: ['Mani','Aceite'],
+    ingredients: ['Arroz',],
     nutrition: {
       calories: 320,
       protein: 18,
       carbs: 24,
       fat: 16
     },
-    allergens: ['Gluten', 'Huevos'],
-    prepTime: 15
+    allergens: [],
   },
   {
     id: 17,
@@ -727,7 +723,6 @@ const menuItems = [
       fat: 16
     },
     allergens: ['Gluten', 'Huevos'],
-    prepTime: 15
   },
   {
     id: 18,
@@ -747,7 +742,6 @@ const menuItems = [
       fat: 16
     },
     allergens: [''],
-    prepTime: 35
   },
   {
     id: 19,
@@ -767,220 +761,209 @@ const menuItems = [
       fat: 16
     },
     allergens: [''],
-    prepTime: 35
   },
   {
     id: 20,
-    name: 'Vino 4 Vacas',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    name: 'Vino Caligiore Organico Malbec',
+    description: 'Vino Caligiore Organico Malbec X 750cc',
     price: 9.99,
     image: '/images/products/16.png',
     category: 'vino',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Uvas',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: ['Malbec', 'x 750 cc', 'Organico'],
   },
   {
     id: 21,
-    name: 'Vino 4 Vacas',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    name: 'Vino Malbec  Félix Enrique',
+    description: 'Un vino orgánico nace de uvas libres de tratamientos con fertilizantes, plaguicidas y cualquier químico sintético, favoreciendo el desarrollo natural de la planta y sus frutos.',
     price: 9.99,
     image: '/images/products/17.png',
     category: 'vino',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Uvas',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: ['SinTacc', 'Organico', 'Malbec', '750 ml'],
   },
   {
     id: 22,
     name: 'Yerba Despalada 3KG',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    description: 'Yerba Despalada Bolsa de 3KG',
     price: 9.99,
     image: '/images/products/24.png',
     category: 'mayorista',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Yerba Mate Despalada',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: ['Organica',],
   },
   {
     id: 23,
     name: 'Yerba Suave por 3KG',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    description: 'Yerba Suave Organica Bolson 3KG',
     price: 9.99,
     image: '/images/products/22.png',
     category: 'mayorista',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Yerba Suave Organica',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: ['Organica',],
   },
   {
     id: 24,
     name: 'Yerba Digestiva por 3kg',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    description: 'Yerba Digestiva por 3kg',
     price: 9.99,
     image: '/images/products/23.png',
     category: 'mayorista',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Yerba Digestiva',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: ['Organica',],
   },
   {
     id: 25,
     name: 'Yerba Ahumada por 3kg',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    description: 'Yerba Ahumada por 3kg',
     price: 9.99,
     image: '/images/products/25.png',
     category: 'mayorista',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Yerba Ahumada',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: ['Organica',],
   },
   
   {
     id: 27,
-    name: 'Aceite Gaia 1 lt',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    name: 'Aceite Gaia Oliva 1 lt',
+    description: 'Aceite de oliva Virgen extra, acidez menor a 0.6% de primera presion en frio.',
     price: 9.99,
     image: '/images/products/18.png',
     category: 'aceites',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Aceitunas',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: [],
   },
   {
     id: 28,
     name: 'Aceite Gaia 3 lt',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    description: 'Aceite de oliva Virgen extra, acidez menor a 0.6% de primera presion en frio.',
     price: 9.99,
     image: '/images/products/19.png',
     category: 'aceites',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Aceitunas',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: [],
   },
   {
     id: 29,
-    name: 'Mix Cereales',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    name: 'Mix de Semillas',
+    description: 'Mix de Semillas',
     price: 9.99,
     image: '/images/products/6.png',
     category: 'cereales',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Chia',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: ['-',],
   },
   {
     id: 30,
     name: 'Jabon Liquido',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    description: 'Jabon Liquido Suelto',
     price: 9.99,
     image: '/images/products/20.png',
     category: 'limpieza',
     popular: false,
     rating: 5,
     reviews: 53,
-    ingredients: ['Ladyfingers', 'Mascarpone', 'Coffee', 'Eggs', 'Sugar', 'Cocoa Powder'],
+    ingredients: ['Jabon Liquido',],
     nutrition: {
       calories: 380,
       protein: 7,
       carbs: 42,
       fat: 22
     },
-    allergens: ['Dairy', 'Eggs', 'Gluten'],
-    prepTime: 15
+    allergens: ['-',],
   },
   {
     id: 31,
     name: 'Suavizante para Ropa',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    description: 'Suavizante para Ropa Suelto',
     price: 9.99,
     image: '/images/products/21.png',
     category: 'limpieza',
     popular: false,
     rating: 5,
     reviews: 0,
-    ingredients: [],
+    ingredients: ['Suavizante',],
     nutrition: {
       calories: 0,
       protein: 0,
@@ -988,19 +971,18 @@ const menuItems = [
       fat: 0
     },
     allergens: [],
-    prepTime: 15
   },
   {
     id: 32,
     name: 'Sal del Himalaya',
-    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream',
+    description: 'Sal del Himalaya',
     price: 9.99,
     image: '/images/products/7.png',
     category: 'sal',
     popular: false,
     rating: 5,
     reviews: 0,
-    ingredients: [],
+    ingredients: ['Sal',],
     nutrition: {
       calories: 0,
       protein: 0,
@@ -1008,19 +990,18 @@ const menuItems = [
       fat: 0
     },
     allergens: [],
-    prepTime: 15
   },
   {
     id: 33,
     name: 'Pasta de Mani - Sabor Ahumada',
-    description: 'Pasta de Mani - Entre Nuts',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
     price: 4800,
     image: '/images/products/pastademani/2.png',
     category: 'pastamani',
     popular: true,
     rating: 4,
     reviews: 42,
-    ingredients: ['Mani','Aceite'],
+    ingredients: ['Mani',],
     nutrition: {
       calories: 320,
       protein: 18,
@@ -1028,19 +1009,18 @@ const menuItems = [
       fat: 16
     },
     allergens: ['SinTacc',],
-    prepTime: 15
   },
   {
     id: 34,
     name: 'Pasta de Mani - Sabor Natural',
-    description: 'Pasta de Mani - Entre Nuts',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
     price: 4800,
     image: '/images/products/pastademani/3.png',
     category: 'pastamani',
     popular: true,
     rating: 4,
     reviews: 42,
-    ingredients: ['Mani','Aceite'],
+    ingredients: ['Mani',],
     nutrition: {
       calories: 320,
       protein: 18,
@@ -1048,19 +1028,18 @@ const menuItems = [
       fat: 16
     },
     allergens: ['SinTacc',],
-    prepTime: 15
   },
   {
     id: 35,
     name: 'Pasta de Mani - Sabor Natural',
-    description: 'Pasta de Mani - Entre Nuts',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
     price: 4800,
     image: '/images/products/pastademani/4.png',
     category: 'pastamani',
     popular: true,
     rating: 4,
     reviews: 42,
-    ingredients: ['Mani','Aceite'],
+    ingredients: ['Mani',],
     nutrition: {
       calories: 320,
       protein: 18,
@@ -1068,19 +1047,18 @@ const menuItems = [
       fat: 16
     },
     allergens: ['SinTacc',],
-    prepTime: 15
   },
   {
     id: 36,
     name: 'Pasta de Mani - Sabor Natural',
-    description: 'Pasta de Mani - Entre Nuts',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
     price: 4800,
     image: '/images/products/pastademani/5.png',
     category: 'pastamani',
     popular: true,
     rating: 4,
     reviews: 42,
-    ingredients: ['Mani','Aceite'],
+    ingredients: ['Mani',],
     nutrition: {
       calories: 320,
       protein: 18,
@@ -1088,19 +1066,18 @@ const menuItems = [
       fat: 16
     },
     allergens: ['SinTacc',],
-    prepTime: 15
   },
   {
     id: 37,
     name: 'Pasta de Mani - Sabor Natural',
-    description: 'Pasta de Mani - Entre Nuts',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
     price: 4800,
     image: '/images/products/pastademani/6.png',
     category: 'pastamani',
     popular: true,
     rating: 4,
     reviews: 42,
-    ingredients: ['Mani','Aceite'],
+    ingredients: ['Mani',],
     nutrition: {
       calories: 320,
       protein: 18,
@@ -1108,14 +1085,166 @@ const menuItems = [
       fat: 16
     },
     allergens: ['SinTacc',],
-    prepTime: 15
   },
   {
     id: 38,
     name: 'Pasta de Mani - Sabor Coco',
-    description: 'Pasta de Mani - Entre Nuts',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
     price: 4800,
     image: '/images/products/pastademani/7.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani',],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+  },
+  {
+    id: 39,
+    name: 'Aceite de Coco - EntreNuts 360 ml',
+    description: 'El aceite de coco neutro es una excelente opción para cocinar rico y saludable, pero también tiene muchos usos cosméticos y corporales.',
+    price: 4350,
+    image: '/images/products/2.png',
+    category: 'aceites',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Coco',],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc', 'Organico', 'Vegano'],
+    
+  },
+  {
+    id: 40,
+    name: 'Pasta de Mani - Sabor Ahumada x 12u',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
+    price: 4800,
+    image: '/images/products/pastademani/2.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani',],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+  },
+  {
+    id: 41,
+    name: 'Pasta de Mani - Sabor Natural x 12u',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
+    price: 4800,
+    image: '/images/products/pastademani/3.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani',],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+  },
+  {
+    id: 42,
+    name: 'Pasta de Mani - Sabor Natural x 12u',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
+    price: 4800,
+    image: '/images/products/pastademani/4.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani',],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+  },
+  {
+    id: 43,
+    name: 'Pasta de Mani - Sabor Natural x 12u',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
+    price: 4800,
+    image: '/images/products/pastademani/5.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani',],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+  },
+  {
+    id: 44,
+    name: 'Pasta de Mani - Sabor Natural x 12u',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
+    price: 4800,
+    image: '/images/products/pastademani/6.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani',],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+  },
+  {
+    id: 45,
+    name: 'Pasta de Mani - Sabor Coco x 12u',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
+    price: 4800,
+    image: '/images/products/pastademani/7.png',
+    category: 'pastamani',
+    popular: true,
+    rating: 4,
+    reviews: 42,
+    ingredients: ['Mani',],
+    nutrition: {
+      calories: 320,
+      protein: 18,
+      carbs: 24,
+      fat: 16
+    },
+    allergens: ['SinTacc',],
+  },
+  {
+    id: 46,
+    name: 'Pasta de Mani - Sabor Natural x12u',
+    description: 'La Pasta de Maní Natural Entrenuts es saludable y nutritiva, elaborada con maní 100% seleccionado y sin aditivos.',
+    price: 4800,
+    image: '/images/products/pastademani/1.png',
     category: 'pastamani',
     popular: true,
     rating: 4,
@@ -1127,9 +1256,10 @@ const menuItems = [
       carbs: 24,
       fat: 16
     },
-    allergens: ['SinTacc',],
-    prepTime: 15
+    allergens: ['SinTacc','Sin Gluten','Vegano'],
   },
+
+
 ];
 
 // Helper function to get category name by ID
