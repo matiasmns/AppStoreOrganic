@@ -22,15 +22,15 @@
 
     <!-- WhatsApp Order Confirmation Splash Screen -->
     <transition name="fade">
-    <div v-if="showWhatsAppSplash" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-green-600 transition-opacity duration-500">
+    <div v-if="showWhatsAppSplash" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-emerald-800 transition-opacity duration-500">
       <div class="text-center px-6">
         <div class="mb-6 relative">
           <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center mx-auto">
             <MessageCircle class="h-14 w-14 text-green-600" />
           </div>
         </div>
-        <h1 class="text-3xl font-bold text-white mb-3">Sending Order</h1>
-        <p class="text-green-100 text-lg mb-8">Redirecting you to WhatsApp...</p>
+        <h1 class="text-3xl font-bold text-white mb-3">Enviando Pedido</h1>
+        <p class="text-green-100 text-lg mb-8">Redirigiendo a WhatsApp...</p>
         
         <div class="relative w-64 h-2 bg-green-700 rounded-full overflow-hidden mx-auto mb-8">
           <div class="absolute top-0 left-0 h-full bg-white rounded-full" 
@@ -39,7 +39,7 @@
         
         <button @click="cancelWhatsAppOrder" 
                 class="px-6 py-2 bg-white text-green-600 rounded-full font-medium hover:bg-green-50 transition-colors">
-          Cancel
+          Cancelar
         </button>
       </div>
     </div>
@@ -313,11 +313,17 @@
             <h3 class="font-medium text-gray-900 mb-3">Tu informacion</h3>
             <div class="grid gap-3">
               <div>
-                <label for="customer-name" class="block text-sm font-medium text-gray-700 mb-1">Nombre y Apellido</label>
-                <input type="text" id="customer-name" v-model="customerInfo.name" 
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                       placeholder="Nombre y Apellido">
-              </div>
+        <label for="customer-name" class="block text-sm font-medium text-gray-700 mb-1">
+          Nombre y Apellido <span class="text-red-500">*</span>
+        </label>
+        <input type="text" id="customer-name" v-model="customerInfo.name" 
+               class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+               :class="{'border-red-500': formSubmitted && !customerInfo.name, 'border-gray-300': !formSubmitted || customerInfo.name}"
+               placeholder="Nombre y Apellido">
+        <p v-if="formSubmitted && !customerInfo.name" class="mt-1 text-xs text-red-500">
+          Este campo es obligatorio
+        </p>
+      </div>
               <div>
                 <label for="customer-address" class="block text-sm font-medium text-gray-700 mb-1">Direccion del Envio</label>
                 <textarea id="customer-address" v-model="customerInfo.address" rows="2"
@@ -325,28 +331,36 @@
                           placeholder="Direccion del Envio"></textarea>
               </div>
               <div class="mt-2">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Retirar en el Local</label>
-              <div class="flex space-x-4">
-                <label class="inline-flex items-center">
-                  <input type="radio" v-model="customerInfo.pickupInStore" :value="false" 
-                         class="w-5 h-5 appearance-none border-2 border-gray-400 rounded-sm checked:bg-blue-600 checked:border-transparent focus:outline-none">
-                  <span class="ml-2">Si</span>
-                </label>
-                <label class="inline-flex items-center">
-                  <input type="radio" v-model="customerInfo.pickupInStore" :value="true" 
-                         class="w-5 h-5 appearance-none border-2 border-gray-400 rounded-sm checked:bg-blue-600 checked:border-transparent focus:outline-none">
-                  <span class="ml-2">No</span>
-                </label>
-              </div>
-            </div>
-              <div>
-                <label for="customer-notes" class="block text-sm font-medium text-gray-700 mb-1">Informacion Adiccional</label>
-                <textarea id="customer-notes" v-model="customerInfo.notes" rows="2"
-                          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                          placeholder="Informacion Adiccional"></textarea>
-              </div>
-            </div>
-          </div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Retirar en el Local <span class="text-red-500">*</span></label>
+        <div class="flex space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" v-model="customerInfo.pickupInStore" :value="false" 
+                   class="w-5 h-5 appearance-none border-2 border-gray-400 rounded-sm checked:bg-blue-600 checked:border-transparent focus:outline-none">
+            <span class="ml-2">Si</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" v-model="customerInfo.pickupInStore" :value="true" 
+                   class="w-5 h-5 appearance-none border-2 border-gray-400 rounded-sm checked:bg-blue-600 checked:border-transparent focus:outline-none">
+            <span class="ml-2">No</span>
+          </label>
+        </div>
+        <p v-if="formSubmitted && customerInfo.pickupInStore === ''" class="mt-1 text-xs text-red-500">
+          Por favor seleccione una opción
+        </p>
+      </div>
+      <div>
+        <label for="customer-notes" class="block text-sm font-medium text-gray-700 mb-1">
+          Informacion Adiccional
+        </label>
+        <textarea id="customer-notes" v-model="customerInfo.notes" rows="2"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  placeholder="Informacion Adiccional"></textarea>
+                  <p v-if="formSubmitted && !customerInfo.notes" class="mt-1 text-xs text-red-500">
+          Este campo es obligatorio
+        </p>
+      </div>
+    </div>
+  </div>
 
 
                     <!-- Checkout Options -->
@@ -354,8 +368,8 @@
             <!-- WhatsApp Order Button -->
             <button @click="initiateWhatsAppOrder" 
         class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-md transition-colors flex items-center justify-center"
-        :class="{ 'opacity-50 cursor-not-allowed': cartItems.length === 0 }"
-        :disabled="cartItems.length === 0">
+        :class="{ 'opacity-50 cursor-not-allowed': cartItems.length === 0 || !isFormValid }"
+          :disabled="cartItems.length === 0 || !isFormValid">
   <MessageCircle class="h-5 w-5 mr-2" />
   Ordenar via WhatsApp
 </button>
@@ -419,6 +433,22 @@ const customerInfo = ref({
   pickupInStore: '',
   notes: ''
 });
+
+
+// Form validation state
+const formSubmitted = ref(false);
+
+// Computed property to check if form is valid
+const isFormValid = computed(() => {
+  return (
+    customerInfo.value.name.trim() !== '' && 
+    customerInfo.value.address.trim() !== '' &&
+    customerInfo.value.notes.trim() !== '' &&  
+    customerInfo.value.pickupInStore !== ''
+  );
+});
+
+
 
 // Restaurant information
 const restaurantInfo = {
@@ -1462,33 +1492,74 @@ const hideSplashScreen = () => {
 
 // WhatsApp order methods
 const initiateWhatsAppOrder = () => {
-  if (cartItems.value.length === 0) return;
-  
-  // Show the WhatsApp splash screen
+  // 1. Check if the cart is empty (optional, but good practice)
+  if (cartItems.value.length === 0) {
+     console.warn("Attempted to initiate WhatsApp order with an empty cart."); // Optional logging
+     // You might want to show a specific message for an empty cart here too.
+     return;
+  }
+
+  // 2. Mark the form as submitted (to trigger validation messages if needed)
+  formSubmitted.value = true;
+
+  // 3. Perform the validation check
+  if (!isFormValid.value) {
+    // If the form is NOT valid, show the error toast and stop execution
+    showToast(
+      'Información incompleta',
+      'Por favor complete todos los campos obligatorios.',
+      'error',
+      3000
+    );
+    return; // Exit the function here
+  }
+
+  // --- If the code reaches this point, the form IS valid ---
+
+  // 4. Show the WhatsApp splash screen
   showWhatsAppSplash.value = true;
   whatsAppSplashProgress.value = 0;
-  
-  // Close the cart sidebar
+
+  // 5. Close the cart sidebar (if applicable)
   isCartOpen.value = false;
-  
-  // Start progress animation
+
+  // 6. Start progress animation
+  // Clear any existing intervals/timeouts just in case
+  if (whatsAppProgressInterval) clearInterval(whatsAppProgressInterval);
+  if (whatsAppRedirectTimeout) clearTimeout(whatsAppRedirectTimeout);
+
   whatsAppProgressInterval = setInterval(() => {
     whatsAppSplashProgress.value += 2;
     if (whatsAppSplashProgress.value >= 100) {
       clearInterval(whatsAppProgressInterval);
     }
   }, 30);
-  
-  // Set timeout to redirect to WhatsApp
+
+  // 7. Set timeout to redirect to WhatsApp
   whatsAppRedirectTimeout = setTimeout(() => {
-    window.open(whatsappOrderLink.value, '_blank');
-    
-    // Hide splash screen after a short delay
+    // Make sure the link is valid before opening
+    if (whatsappOrderLink.value) {
+        window.open(whatsappOrderLink.value, '_blank');
+    } else {
+        console.error("WhatsApp order link is not defined!");
+        // Handle the error, maybe show another toast
+        showToast(
+            'Error',
+            'No se pudo generar el enlace de pedido. Intente nuevamente.',
+            'error',
+            4000
+        );
+    }
+
+    // Hide splash screen after a short delay, regardless of whether window.open worked
     setTimeout(() => {
       showWhatsAppSplash.value = false;
       whatsAppSplashProgress.value = 0;
+      // Reset form submitted status if needed after successful attempt
+      // formSubmitted.value = false; // Optional: Reset for next time
     }, 500);
-  }, 1500);
+
+  }, 1500); // 1.5 seconds delay
 };
 
 const cancelWhatsAppOrder = () => {
