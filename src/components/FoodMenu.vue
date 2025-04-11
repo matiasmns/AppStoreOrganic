@@ -20,6 +20,31 @@
     </div>
   </div>
 
+    <!-- WhatsApp Order Confirmation Splash Screen -->
+    <transition name="fade">
+    <div v-if="showWhatsAppSplash" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-green-600 transition-opacity duration-500">
+      <div class="text-center px-6">
+        <div class="mb-6 relative">
+          <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center mx-auto">
+            <MessageCircle class="h-14 w-14 text-green-600" />
+          </div>
+        </div>
+        <h1 class="text-3xl font-bold text-white mb-3">Sending Order</h1>
+        <p class="text-green-100 text-lg mb-8">Redirecting you to WhatsApp...</p>
+        
+        <div class="relative w-64 h-2 bg-green-700 rounded-full overflow-hidden mx-auto mb-8">
+          <div class="absolute top-0 left-0 h-full bg-white rounded-full" 
+               :style="{ width: `${whatsAppSplashProgress}%` }"></div>
+        </div>
+        
+        <button @click="cancelWhatsAppOrder" 
+                class="px-6 py-2 bg-white text-green-600 rounded-full font-medium hover:bg-green-50 transition-colors">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </transition>
+
   <!-- Food Detail Modal -->
   <transition name="modal">
     <div v-if="selectedFood" class="fixed inset-0 z-40 overflow-y-auto">
@@ -146,7 +171,7 @@
   </div>
 
   <!-- Main App Content -->
-  <div class="min-h-screen bg-neutral-50" :class="showSplash ? 'overflow-hidden' : ''">
+  <div class="min-h-screen bg-neutral-50" :class="showSplash || showWhatsAppSplash ? 'overflow-hidden' : ''">
     <!-- Header -->
     <header class="bg-emerald-800 text-white shadow-lg sticky top-0 z-10">
       <div class="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -327,14 +352,13 @@
                     <!-- Checkout Options -->
                     <div class="grid gap-3">
             <!-- WhatsApp Order Button -->
-            <a :href="whatsappOrderLink" target="_blank" rel="noopener noreferrer"
-               class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-md transition-colors flex items-center justify-center"
-               :class="{ 'opacity-50 cursor-not-allowed': cartItems.length === 0 }"
-               :disabled="cartItems.length === 0"
-               @click="cartItems.length === 0 ? $event.preventDefault() : null">
-              <MessageCircle class="h-5 w-5 mr-2" />
-              Ordenar via WhatsApp
-            </a>
+            <button @click="initiateWhatsAppOrder" 
+        class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-md transition-colors flex items-center justify-center"
+        :class="{ 'opacity-50 cursor-not-allowed': cartItems.length === 0 }"
+        :disabled="cartItems.length === 0">
+  <MessageCircle class="h-5 w-5 mr-2" />
+  Ordenar via WhatsApp
+</button>
             
             <!-- Regular Checkout Button -->
 
@@ -1262,6 +1286,13 @@ const menuItems = [
 
 ];
 
+// Add these variables to your existing script
+// WhatsApp splash screen state
+const showWhatsAppSplash = ref(false);
+const whatsAppSplashProgress = ref(0);
+let whatsAppProgressInterval = null;
+let whatsAppRedirectTimeout = null;
+
 // Helper function to get category name by ID
 const getCategoryName = (categoryId) => {
   const category = categories.find(cat => cat.id === categoryId);
@@ -1427,6 +1458,47 @@ const hideSplashScreen = () => {
   setTimeout(() => {
     showSplash.value = false;
   }, 500); // Match this to the duration in the CSS transition
+};
+
+// WhatsApp order methods
+const initiateWhatsAppOrder = () => {
+  if (cartItems.value.length === 0) return;
+  
+  // Show the WhatsApp splash screen
+  showWhatsAppSplash.value = true;
+  whatsAppSplashProgress.value = 0;
+  
+  // Close the cart sidebar
+  isCartOpen.value = false;
+  
+  // Start progress animation
+  whatsAppProgressInterval = setInterval(() => {
+    whatsAppSplashProgress.value += 2;
+    if (whatsAppSplashProgress.value >= 100) {
+      clearInterval(whatsAppProgressInterval);
+    }
+  }, 30);
+  
+  // Set timeout to redirect to WhatsApp
+  whatsAppRedirectTimeout = setTimeout(() => {
+    window.open(whatsappOrderLink.value, '_blank');
+    
+    // Hide splash screen after a short delay
+    setTimeout(() => {
+      showWhatsAppSplash.value = false;
+      whatsAppSplashProgress.value = 0;
+    }, 500);
+  }, 1500);
+};
+
+const cancelWhatsAppOrder = () => {
+  // Clear timeouts and intervals
+  clearInterval(whatsAppProgressInterval);
+  clearTimeout(whatsAppRedirectTimeout);
+  
+  // Hide splash screen
+  showWhatsAppSplash.value = false;
+  whatsAppSplashProgress.value = 0;
 };
 
 // Lifecycle hooks
