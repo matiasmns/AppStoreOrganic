@@ -24,9 +24,9 @@
     <transition name="fade">
     <div v-if="showWhatsAppSplash" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-emerald-800 transition-opacity duration-500">
       <div class="text-center px-6">
-        <div class="mb-6 relative">
-          <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center mx-auto">
-            <MessageCircle class="h-14 w-14 text-green-600" />
+        <div class="mb-1 relative">
+          <div class="w-24 h-24 rounded-full bg-green flex items-center justify-center mx-auto">
+            <ShoppingBasket class="h-14 w-14 text-white" style="color: #ffffff;"/>
           </div>
         </div>
         <h1 class="text-3xl font-bold text-white mb-3">Enviando Pedido</h1>
@@ -325,10 +325,13 @@
         </p>
       </div>
               <div>
-                <label for="customer-address" class="block text-sm font-medium text-gray-700 mb-1">Direccion del Envio</label>
+                <label for="customer-address" class="block text-sm font-medium text-gray-700 mb-1">Direccion del Envio <span class="text-red-500">*</span></label>
                 <textarea id="customer-address" v-model="customerInfo.address" rows="2"
                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                           placeholder="Direccion del Envio"></textarea>
+                          <p v-if="formSubmitted && !customerInfo.address" class="mt-1 text-xs text-red-500">
+          Este campo es obligatorio
+        </p>
               </div>
               <div class="mt-2">
         <label class="block text-sm font-medium text-gray-700 mb-2">Retirar en el Local <span class="text-red-500">*</span></label>
@@ -350,7 +353,7 @@
       </div>
       <div>
         <label for="customer-notes" class="block text-sm font-medium text-gray-700 mb-1">
-          Informacion Adiccional
+          Informacion Adiccional <span class="text-red-500">*</span>
         </label>
         <textarea id="customer-notes" v-model="customerInfo.notes" rows="2"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
@@ -366,13 +369,16 @@
                     <!-- Checkout Options -->
                     <div class="grid gap-3">
             <!-- WhatsApp Order Button -->
-            <button @click="initiateWhatsAppOrder" 
-        class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-md transition-colors flex items-center justify-center"
-        :class="{ 'opacity-50 cursor-not-allowed': cartItems.length === 0 || !isFormValid }"
-          :disabled="cartItems.length === 0 || !isFormValid">
-  <MessageCircle class="h-5 w-5 mr-2" />
-  Ordenar via WhatsApp
-</button>
+            <button @click="initiateWhatsAppOrder"
+          class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-md transition-colors flex items-center justify-center"
+         
+          
+          :class="{ 'opacity-50 cursor-not-allowed': cartItems.length === 0 || !isFormValid }"
+          :disabled="cartItems.length === 0">
+
+          <MessageCircle class="h-5 w-5 mr-2" />
+          Ordenar via WhatsApp
+        </button>
             
             <!-- Regular Checkout Button -->
 
@@ -401,7 +407,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { ShoppingBag, ShoppingCart, X, Trash2, CheckCircle, Star, Check, Clock, Heart, MessageCircle } from 'lucide-vue-next';
+import { ShoppingBag, ShoppingCart, X, Trash2, CheckCircle, Star, Check, Clock, Heart, MessageCircle, Truck, Package2Icon, ShoppingBasket } from 'lucide-vue-next';
 
 import { defineProps } from 'vue';
 const props = defineProps({
@@ -425,6 +431,7 @@ const isCartOpen = ref(false);
 const cartItems = ref([]);
 const showInstallPrompt = ref(false);
 let deferredPrompt = null;
+
 
 // Customer information
 const customerInfo = ref({
@@ -452,9 +459,9 @@ const isFormValid = computed(() => {
 
 // Restaurant information
 const restaurantInfo = {
-  name: 'Producos Organicos Santa Fe',
+  name: 'Productos Organicos Santa Fe',
   phone: '5493425108911', // Replace with the actual WhatsApp number (include country code)
-  address: '123 Tasty Street, Santa Fe'
+  address: 'Santa Fe Capital'
 };
 
 // Categories data
@@ -1370,10 +1377,10 @@ const formatOrderForWhatsApp = () => {
   }
   
   // Add timestamp
-  message += `\nInformacion del pedido: ${new Date().toLocaleString()}\n`;
+  message += `\nRegistro del Pedido: ${new Date().toLocaleString()}\n`;
   
   // Add thank you message
-  message += '\nGracias por su compra!';
+  message += '\nGracias por elegirnos!';
   
   return encodeURIComponent(message);
 };
@@ -1502,16 +1509,29 @@ const initiateWhatsAppOrder = () => {
   // 2. Mark the form as submitted (to trigger validation messages if needed)
   formSubmitted.value = true;
 
-  // 3. Perform the validation check
+  // --- Specific Check ---
+  // Trim whitespace to consider fields with only spaces as empty
   if (!isFormValid.value) {
-    // If the form is NOT valid, show the error toast and stop execution
-    showToast(
-      'Información incompleta',
-      'Por favor complete todos los campos obligatorios.',
-      'error',
-      3000
-    );
-    return; // Exit the function here
+    let errorTitle = 'Información Incompleta';
+    let errorMessage = 'Por favor complete todos los campos obligatorios.'; // Default message
+
+    // Find the first error to show in the toast
+    if (customerInfo.value.name.trim() === '') {
+      errorMessage = 'Por favor, ingrese su Nombre y Apellido.';
+    } else if (customerInfo.value.address.trim() === '') {
+      errorMessage = 'Por favor, ingrese su Dirección de Envío.';
+    } else if (customerInfo.value.pickupInStore === '') { // Check if selection was made
+        errorMessage = 'Por favor, indique si retira en el local (Si/No).';
+    } else if (customerInfo.value.notes.trim() === '') {
+        errorMessage = 'Por favor, complete el campo Información Adicional.';
+    }
+    // else {
+       // Optional: Handle unexpected validation errors if logic diverges
+       // console.error("isFormValid is false, but no specific field found empty.");
+    // }
+
+    showToast(errorTitle, errorMessage, 'error', 3000);
+    return; // Stop execution because the form is invalid
   }
 
   // --- If the code reaches this point, the form IS valid ---
