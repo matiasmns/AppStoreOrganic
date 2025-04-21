@@ -186,6 +186,43 @@
       </div>
     </header>
 
+
+
+      <!-- Recipe Banner with Image Background -->
+      <router-link to="/recipes">
+  <div 
+    class="relative cursor-pointer transition-transform hover:scale-[1.01]" 
+    @click="navigateToRecipes"
+    style="height: 120px; overflow: hidden;">
+    <!-- Background Image -->
+    <div 
+      class="absolute inset-0 bg-cover bg-center" 
+      style="background-image: url('/images/banner/02.png');">
+    </div>
+    <!-- Overlay for better text readability -->
+    <div class="absolute inset-0 bg-green-900/40"></div>
+    
+    <!-- Content -->
+    <div class="container relative mx-auto h-full px-4 flex items-center justify-between z-10">
+      <div class="flex items-center">
+        <div class="bg-white/90 p-2 rounded-full mr-3">
+          <Utensils class="h-6 w-6 text-amber-800" />
+        </div>
+        <div>
+          <h3 class="font-medium text-white text-xl">Recetas Saludables</h3>
+          <p class="text-sm text-amber-50">Descubre deliciosas recetas con nuestros productos orgánicos</p>
+        </div>
+      </div>
+      <div class="bg-white/90 p-2 rounded-full">
+        <ChevronRight class="h-5 w-5 text-amber-800" />
+      </div>
+    </div>
+  </div>
+</router-link>
+
+
+
+
     <!-- Category Navigation -->
     <div class="bg-white sticky top-14 z-10 shadow-md">
       <div class="container mx-auto px-4 py-2 overflow-x-auto">
@@ -408,11 +445,20 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { ShoppingBag, ShoppingCart, X, Trash2, CheckCircle, Star, Check, Clock, Heart, MessageCircle, Truck, Package2Icon, ShoppingBasket } from 'lucide-vue-next';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+import RecipesPage from './RecipesPage.vue';
 
 import { defineProps } from 'vue';
 const props = defineProps({
   msg: String // Or ['msg']
 });
+
+const navigateToRecipes = () => {
+  router.push('/recipes');
+  // Remove the return statement - it's not needed
+};
 
 // Splash screen state
 const showSplash = ref(true);
@@ -440,6 +486,8 @@ const customerInfo = ref({
   pickupInStore: '',
   notes: ''
 });
+
+
 
 
 // Form validation state
@@ -1606,6 +1654,19 @@ onMounted(() => {
     // Show the install prompt
     showInstallPrompt.value = true;
   });
+
+
+// Fallback for banner image
+const bannerImage = new Image();
+  bannerImage.src = '/images/banner/recipes-banner.jpg';
+  bannerImage.onerror = () => {
+    console.warn('Banner image failed to load, using fallback style');
+    const bannerElement = document.querySelector('.recipe-banner-bg');
+    if (bannerElement) {
+      bannerElement.style.backgroundColor = '#FEF3C7'; // amber-100
+    }
+  };
+
 });
 </script>
 
