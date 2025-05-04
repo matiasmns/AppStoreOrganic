@@ -344,6 +344,23 @@
           </div>
           
 
+
+          <!-- Customer Information Alias -->
+
+          <div class="mt-4 pt-4 border-t"></div>
+          <label for="customer-name" class="block text-sm font-medium text-gray-700 mb-1">
+          (Alias en caso de Deposito) <span class="text-red-500"></span>
+          </label>
+          <div class="flex justify-between mb-4 ">
+            
+            <span class="font-bold">Alias:</span>
+            <span class="font-semi">tienda.org.stafe</span>
+          </div>
+
+
+
+          
+
           
           <!-- Customer Information Form -->
           <div class="mt-4 pt-4 border-t">
@@ -564,7 +581,7 @@ const menuItems = [
     id: 2,
     name: 'Huevos de Campo',
     description: 'Mapple de huevos de gallinas criadas al aire libre: Nuestros huevos provienen de gallinas alimentadas de manera natural, sin hormonas ni antibióticos, y criadas al aire libre.',
-    price: 9.99,
+    price: 9000,
     image: '/images/products/4.png',
     category: 'huevos',
     popular: false,
@@ -702,7 +719,7 @@ const menuItems = [
     id: 9,
     name: 'Vino 4 Vacas X 750cc',
     description: 'Vino Vacas Gordas Cabernet Malbec X 750cc Bodega Caligiore',
-    price: 9.99,
+    price: 15000,
     image: '/images/products/15.png',
     category: 'vino',
     popular: false,
@@ -719,9 +736,9 @@ const menuItems = [
   },
   {
     id: 10,
-    name: 'Yerba Mate Digestiva',
+    name: 'Yerba Mate Digestiva 1kg',
     description: ' Corte Tradicional, con un sabor intenso. Tiene yuyos del amazona misionero, Manzanilla, Marcela, Carnicera, Te Verde, Palta, Cedron Es una Yerba Diuretica, te ayuda si tenes problemas digestivos o intestinales. ',
-    price: 5500,
+    price: 7000,
     image: '/images/products/11.png',
     category: 'yerbamate',
     popular: false,
@@ -738,9 +755,9 @@ const menuItems = [
   },
   {
     id: 11,
-    name: 'Yerba Mate Despalada',
+    name: 'Yerba Mate Despalada 1kg',
     description: ' Corte Tradicional, con un sabor intenso. Tiene yuyos del amazona misionero, Manzanilla, Marcela, Carnicera, Te Verde, Palta, Cedron Es una Yerba Diuretica, te ayuda si tenes problemas digestivos o intestinales. ',
-    price: 6000,
+    price: 6500,
     image: '/images/products/12.png',
     category: 'yerbamate',
     popular: false,
@@ -757,9 +774,9 @@ const menuItems = [
   },
   {
     id: 12,
-    name: 'Yerba Mate Ahumada',
+    name: 'Yerba Mate Ahumada 1kg',
     description: ' Corte Tradicional, con un sabor intenso. Tiene yuyos del amazona misionero, Manzanilla, Marcela, Carnicera, Te Verde, Palta, Cedron Es una Yerba Diuretica, te ayuda si tenes problemas digestivos o intestinales. ',
-    price: 5500,
+    price: 6000,
     image: '/images/products/13.png',
     category: 'yerbamate',
     popular: false,
@@ -776,9 +793,9 @@ const menuItems = [
   },
   {
     id: 13,
-    name: 'Yerba Mate Suave',
+    name: 'Yerba Mate Suave 1kg',
     description: ' Corte Tradicional, con un sabor intenso. Tiene yuyos del amazona misionero, Manzanilla, Marcela, Carnicera, Te Verde, Palta, Cedron Es una Yerba Diuretica, te ayuda si tenes problemas digestivos o intestinales. ',
-    price: 5500,
+    price: 6000,
     image: '/images/products/14.png',
     category: 'yerbamate',
     popular: false,
@@ -797,9 +814,9 @@ const menuItems = [
 
   {
     id: 16,
-    name: 'Arroz Organico',
+    name: 'Arroz Organico 1kg',
     description: 'Arroz orgánico que se cultiva aprovechando la capacidad productiva natural de los arrozales, sin recurrir a pesticidas ni fertilizantes químicos ',
-    price: 4800,
+    price: 3000,
     image: '/images/products/5.png',
     category: 'arroz',
     popular: true,
@@ -818,7 +835,7 @@ const menuItems = [
     id: 17,
     name: 'Miel Organica',
     description: 'Miel Pura de campo',
-    price: 4800,
+    price: 5500,
     image: '/images/products/3.png',
     category: 'miel',
     popular: true,
@@ -875,7 +892,7 @@ const menuItems = [
     id: 20,
     name: 'Vino Caligiore Organico Malbec',
     description: 'Vino Caligiore Organico Malbec X 750cc',
-    price: 9.99,
+    price: 15000,
     image: '/images/products/16.png',
     category: 'vino',
     popular: false,
@@ -894,7 +911,7 @@ const menuItems = [
     id: 21,
     name: 'Vino Malbec  Félix Enrique',
     description: 'Un vino orgánico nace de uvas libres de tratamientos con fertilizantes, plaguicidas y cualquier químico sintético, favoreciendo el desarrollo natural de la planta y sus frutos.',
-    price: 9.99,
+    price: 15000,
     image: '/images/products/17.png',
     category: 'vino',
     popular: false,
@@ -911,10 +928,10 @@ const menuItems = [
   },
   {
     id: 22,
-    name: 'Yerba Despalada 3KG',
-    description: 'Yerba Despalada Bolsa de 3KG',
-    price: 9.99,
-    image: '/images/products/24.png',
+    name: 'Yerba Despalada 10Kg',
+    description: 'Yerba Despalada Bolsa de 10Kg ',
+    price: 55000,
+    image: '/images/products/yerbas_bolson/30.png',
     category: 'mayorista',
     popular: false,
     rating: 5,
@@ -930,10 +947,10 @@ const menuItems = [
   },
   {
     id: 23,
-    name: 'Yerba Suave por 3KG',
-    description: 'Yerba Suave Organica Bolson 3KG',
-    price: 9.99,
-    image: '/images/products/22.png',
+    name: 'Yerba Suave por 10 Kg',
+    description: 'Yerba Suave Organica Bolson 10Kg',
+    price: 50000,
+    image: '/images/products/yerbas_bolson/28.png',
     category: 'mayorista',
     popular: false,
     rating: 5,
@@ -949,10 +966,10 @@ const menuItems = [
   },
   {
     id: 24,
-    name: 'Yerba Digestiva por 3kg',
-    description: 'Yerba Digestiva por 3kg',
-    price: 9.99,
-    image: '/images/products/23.png',
+    name: 'Yerba Digestiva por 10 Kg',
+    description: 'Yerba Digestiva por 10 Kg',
+    price: 50000,
+    image: '/images/products/yerbas_bolson/29.png',
     category: 'mayorista',
     popular: false,
     rating: 5,
@@ -968,10 +985,10 @@ const menuItems = [
   },
   {
     id: 25,
-    name: 'Yerba Ahumada por 3kg',
-    description: 'Yerba Ahumada por 3kg',
-    price: 9.99,
-    image: '/images/products/25.png',
+    name: 'Yerba Ahumada por 10 Kg',
+    description: 'Yerba Ahumada por 10 Kg',
+    price: 50000,
+    image: '/images/products/yerbas_bolson/31.png',
     category: 'mayorista',
     popular: false,
     rating: 5,
@@ -990,7 +1007,7 @@ const menuItems = [
     id: 27,
     name: 'Aceite Gaia Oliva 1 lt',
     description: 'Aceite de oliva Virgen extra, acidez menor a 0.6% de primera presion en frio.',
-    price: 9.99,
+    price: 0,
     image: '/images/products/18.png',
     category: 'aceites',
     popular: false,
@@ -1009,7 +1026,7 @@ const menuItems = [
     id: 28,
     name: 'Aceite Gaia 3 lt',
     description: 'Aceite de oliva Virgen extra, acidez menor a 0.6% de primera presion en frio.',
-    price: 9.99,
+    price: 0,
     image: '/images/products/19.png',
     category: 'aceites',
     popular: false,
@@ -1028,7 +1045,7 @@ const menuItems = [
     id: 29,
     name: 'Mix de Semillas',
     description: 'Mix de Semillas',
-    price: 9.99,
+    price: 0,
     image: '/images/products/6.png',
     category: 'cereales',
     popular: false,
@@ -1047,7 +1064,7 @@ const menuItems = [
     id: 30,
     name: 'Jabon Liquido',
     description: 'Jabon Liquido Suelto',
-    price: 9.99,
+    price: 0,
     image: '/images/products/20.png',
     category: 'limpieza',
     popular: false,
@@ -1066,8 +1083,8 @@ const menuItems = [
     id: 31,
     name: 'Suavizante para Ropa',
     description: 'Suavizante para Ropa Suelto',
-    price: 9.99,
-    image: '/images/products/21.png',
+    price: 0,
+    image: '/images/products/27.png',
     category: 'limpieza',
     popular: false,
     rating: 5,
@@ -1085,7 +1102,7 @@ const menuItems = [
     id: 32,
     name: 'Sal del Himalaya',
     description: 'Sal del Himalaya',
-    price: 9.99,
+    price: 0,
     image: '/images/products/7.png',
     category: 'sal',
     popular: false,
@@ -1366,6 +1383,25 @@ const menuItems = [
       fat: 16
     },
     allergens: ['SinTacc','Sin Gluten','Vegano'],
+  },
+  {
+    id: 47,
+    name: 'Huevos de Campo blancos',
+    description: 'Mapple de huevos de gallinas criadas al aire libre: Nuestros huevos provienen de gallinas alimentadas de manera natural, sin hormonas ni antibióticos, y criadas al aire libre.',
+    price: 7500,
+    image: '/images/products/4.png',
+    category: 'huevos',
+    popular: false,
+    rating: 5,
+    reviews: 0,
+    ingredients: ['Huevos',],
+    nutrition: {
+      calories: 180,
+      protein: 4,
+      carbs: 28,
+      fat: 6
+    },
+    allergens: ['SinTacc'],
   },
 
 

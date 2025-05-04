@@ -6,188 +6,67 @@ import { ArrowLeft, Clock, ChefHat, Search, Filter, Star } from 'lucide-vue-next
 const recipes = ref([
   {
     id: 1,
-    title: "Ensalada de Quinoa Orgánica",
-    description: "Una ensalada nutritiva con quinoa orgánica, vegetales frescos y aderezo de limón",
-    image: "/images/banner/02.png",
-    prepTime: "20 min",
+    title: "Masitas de almendra ",
+    description: "Preparacion en 10 minutos / Coccion en 12 minutos",
+    image: "/images/products/recetas_img/32.png",
+    prepTime: "12 min",
     difficulty: "Fácil",
-    category: "Ensaladas",
+    category: "Snacks",
     rating: 4.8,
     reviews: 24,
     ingredients: [
-      "1 taza de quinoa orgánica",
-      "2 tazas de agua",
-      "1 pepino mediano",
-      "1 pimiento rojo",
-      "1/4 taza de aceite de oliva orgánico",
-      "Jugo de 2 limones",
-      "Sal y pimienta al gusto"
+      "240 g de harina de almendras",
+      "Media cucharadita de polvo para hornear",
+      "4 cucharadas de aceite de coco",
+      "4 cucharadas de miel",
+      "una pizca de sal",
+      "4 cucharadas de chips de chocolate"
     ],
     instructions: [
-      "Enjuagar la quinoa bajo agua fría.",
-      "Cocinar la quinoa en 2 tazas de agua hasta que esté tierna (aprox. 15 minutos).",
-      "Dejar enfriar la quinoa.",
-      "Cortar el pepino y el pimiento en cubos pequeños.",
+      "Precalentá el horno a 180 °C.",
+      "Mezclá en un bol: harina de almendras, sal y polvo para hornear.",
+      "Agregá aceite de coco y miel. Mezclá bien y sumá los chips de chocolate.",
+      "Colocá porciones de masa sobre una bandeja con papel vegetal o aceitada.",
       "Mezclar la quinoa con los vegetales.",
-      "Preparar el aderezo con aceite de oliva, jugo de limón, sal y pimienta.",
-      "Verter el aderezo sobre la ensalada y mezclar bien."
+      "Dales forma con las manos mojadas.",
+      "Horneá 10-12 minutos hasta que estén doraditas."
     ]
   },
   {
     id: 2,
-    title: "Batido Verde Energético",
-    description: "Batido nutritivo con espinacas, manzana y pasta de maní natural",
-    image: "/images/banner/03.png",
-    prepTime: "5 min",
+    title: "Tortilla de huevo y avena",
+    description: "Preparacion en 10 minutos / Coccion en 10 minutos",
+    image: "/images/products/recetas_img/33.png",
+    prepTime: "10 min",
     difficulty: "Fácil",
-    category: "Bebidas",
+    category: "Snacks",
     rating: 4.5,
     reviews: 18,
     ingredients: [
-      "2 tazas de espinacas orgánicas",
-      "1 manzana verde",
-      "1 cucharada de pasta de maní natural",
+      "2 huevos",
+      "50 gramos de copos de avena",
+      "Leche descremada",
       "1 taza de leche de almendras",
-      "1 cucharada de miel orgánica",
-      "Hielo al gusto"
+      "1 pizca de sal",
+      
     ],
     instructions: [
-      "Lavar bien las espinacas.",
-      "Cortar la manzana en trozos (retirar las semillas).",
-      "Colocar todos los ingredientes en la licuadora.",
-      "Licuar hasta obtener una mezcla homogénea.",
-      "Servir inmediatamente."
+      "Batí los huevos en un bol.",
+      "Agregá avena, leche y sal. Mezclá bien.",
+      "Calentá una sartén antiadherente a fuego medio.",
+      "Verté la mezcla y cociná hasta que se dore por los bordes.",
+      "Dala vuelta con cuidado y cociná unos minutos más.",
+      "Servila caliente o fría con tus toppings favoritos."
     ]
   },
-  {
-    id: 3,
-    title: "Bowl de Açaí con Granola",
-    description: "Delicioso bowl de açaí con frutas frescas y granola casera",
-    image: "/images/banner/04.png",
-    prepTime: "15 min",
-    difficulty: "Media",
-    category: "Desayunos",
-    rating: 4.9,
-    reviews: 32,
-    ingredients: [
-      "2 paquetes de pulpa de açaí congelada",
-      "1 plátano maduro",
-      "1/2 taza de arándanos orgánicos",
-      "1/4 taza de granola casera",
-      "2 cucharadas de miel orgánica",
-      "Frutas frescas para decorar"
-    ],
-    instructions: [
-      "Descongelar ligeramente la pulpa de açaí.",
-      "Licuar el açaí con el plátano hasta obtener una textura cremosa.",
-      "Verter la mezcla en un bowl.",
-      "Decorar con arándanos, granola y otras frutas frescas.",
-      "Rociar con miel orgánica antes de servir."
-    ]
-  },
-  {
-    id: 4,
-    title: "Pasta de Maní Casera",
-    description: "Aprende a hacer tu propia pasta de maní natural en casa",
-    image: "/images/banner/05.png",
-    prepTime: "30 min",
-    difficulty: "Media",
-    category: "Básicos",
-    rating: 4.7,
-    reviews: 15,
-    ingredients: [
-      "2 tazas de maní tostado sin sal",
-      "1-2 cucharadas de aceite de coco orgánico",
-      "1 cucharadita de miel orgánica (opcional)",
-      "Pizca de sal marina (opcional)"
-    ],
-    instructions: [
-      "Precalentar el horno a 180°C.",
-      "Extender el maní en una bandeja para hornear.",
-      "Tostar por 10 minutos, revolviendo a la mitad del tiempo.",
-      "Dejar enfriar ligeramente.",
-      "Procesar el maní en un procesador de alimentos hasta obtener una textura cremosa (7-10 minutos).",
-      "Agregar el aceite de coco si es necesario para lograr la consistencia deseada.",
-      "Añadir miel y sal al gusto.",
-      "Almacenar en un frasco de vidrio hermético."
-    ]
-  },
-  {
-    id: 5,
-    title: "Risotto de Hongos Silvestres",
-    description: "Un cremoso risotto con hongos silvestres y arroz orgánico",
-    image: "/images/recipes/mushroom-risotto.jpg",
-    prepTime: "45 min",
-    difficulty: "Alta",
-    category: "Platos Principales",
-    rating: 4.6,
-    reviews: 28,
-    ingredients: [
-      "1 1/2 tazas de arroz orgánico para risotto",
-      "4 tazas de caldo de verduras orgánico",
-      "300g de hongos silvestres variados",
-      "1 cebolla mediana picada",
-      "2 dientes de ajo picados",
-      "1/2 taza de vino blanco orgánico",
-      "2 cucharadas de aceite de oliva orgánico",
-      "1/4 taza de queso parmesano rallado",
-      "2 cucharadas de mantequilla orgánica",
-      "Sal y pimienta al gusto",
-      "Perejil fresco picado para decorar"
-    ],
-    instructions: [
-      "Calentar el caldo de verduras en una olla y mantenerlo a fuego lento.",
-      "En otra olla grande, calentar el aceite de oliva y saltear la cebolla hasta que esté transparente.",
-      "Agregar el ajo y cocinar por 1 minuto más.",
-      "Añadir los hongos y cocinar hasta que estén dorados.",
-      "Incorporar el arroz y revolver para que se impregne con los sabores.",
-      "Verter el vino blanco y cocinar hasta que se evapore.",
-      "Agregar el caldo caliente, una taza a la vez, esperando que el arroz lo absorba antes de añadir más.",
-      "Continuar este proceso por aproximadamente 18-20 minutos, hasta que el arroz esté al dente.",
-      "Retirar del fuego y agregar la mantequilla y el queso parmesano.",
-      "Salpimentar al gusto y decorar con perejil fresco antes de servir."
-    ]
-  },
-  {
-    id: 6,
-    title: "Galletas de Avena y Miel",
-    description: "Deliciosas galletas caseras con avena orgánica y miel pura",
-    image: "/images/recipes/oatmeal-cookies.jpg",
-    prepTime: "35 min",
-    difficulty: "Fácil",
-    category: "Postres",
-    rating: 4.8,
-    reviews: 42,
-    ingredients: [
-      "2 tazas de avena orgánica",
-      "1 taza de harina integral orgánica",
-      "1/2 taza de mantequilla orgánica a temperatura ambiente",
-      "1/2 taza de miel orgánica",
-      "1 huevo orgánico",
-      "1 cucharadita de extracto de vainilla",
-      "1/2 cucharadita de bicarbonato de sodio",
-      "1/2 cucharadita de canela en polvo",
-      "1/4 cucharadita de sal marina",
-      "1/2 taza de pasas orgánicas (opcional)"
-    ],
-    instructions: [
-      "Precalentar el horno a 175°C y preparar una bandeja con papel para hornear.",
-      "En un bowl, mezclar la avena, harina, bicarbonato, canela y sal.",
-      "En otro bowl, batir la mantequilla con la miel hasta que esté cremosa.",
-      "Añadir el huevo y la vainilla a la mezcla de mantequilla y batir bien.",
-      "Incorporar gradualmente los ingredientes secos a la mezcla húmeda.",
-      "Agregar las pasas si se desea.",
-      "Formar bolitas con la masa y colocarlas en la bandeja, dejando espacio entre ellas.",
-      "Hornear por 12-15 minutos hasta que estén doradas.",
-      "Dejar enfriar en la bandeja por 5 minutos antes de transferir a una rejilla."
-    ]
-  }
+
+ 
 ]);
 
 // Search and filter functionality
 const searchQuery = ref('');
 const selectedCategory = ref('Todos');
-const categories = ['Todos', 'Ensaladas', 'Bebidas', 'Desayunos', 'Básicos', 'Platos Principales', 'Postres'];
+const categories = ['Todos', 'Snacks', 'Otros'];
 
 const filteredRecipes = computed(() => {
   let filtered = recipes.value;
